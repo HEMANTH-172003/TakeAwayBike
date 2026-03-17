@@ -1,1 +1,1 @@
-web: gunicorn TakeAwayBike.wsgi
+web: gunicorn myproject.wsgi
