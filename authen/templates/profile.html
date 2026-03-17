@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'authen.css' %}">
+
+<div class="update-page"> 
+    <div class="watermark"></div>
+
+    <div class="update-container profile-card">
+        <h2>My Profile</h2>
+
+        <div class="profile-content">
+            <div class="profile-image-section">
+                <div class="profile-image-container">
+                    {% if data.profile_image %}
+                        <img src="{{ data.profile_image.url }}" alt="Profile Image" class="profile-img">
+                    {% else %}
+                        <img src="{% static 'images/default-user.png' %}" alt="Default Profile" class="profile-img">
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="profile-info-section">
+                <div class="info-item">
+                    <span class="label">Full Name</span>
+                    <p class="value">{{ data.user.first_name }} {{ data.user.last_name }}</p>
+                </div>
+                <div class="info-item">
+                    <span class="label">Email</span>
+                    <p class="value">{{ data.user.email }}</p>
+                </div>
+                <div class="info-item">
+                    <span class="label">Mobile</span>
+                    <p class="value">{{ data.mobile }}</p>
+                </div>
+                <div class="info-item">
+                    <span class="label">Address</span>
+                    <p class="value">{{ data.address }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-actions">
+            <a href="{% url 'update' %}" class="btn-link main-btn">Update Profile</a>
+            <a href="{% url 'reset' %}" class="forgot-link">Change Password</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

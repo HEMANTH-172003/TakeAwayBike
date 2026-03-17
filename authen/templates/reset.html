@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'authen.css' %}">
+
+<div class="reset-page">
+
+    <!-- Watermark -->
+    <div class="watermark"></div>
+
+    <!-- Reset Card -->
+    <div class="reset-container">
+
+        <h2>Set New Password</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="input-group">
+                <label>New Password</label>
+                <input type="password" name="password" placeholder="Enter new password" required>
+            </div>
+
+            <button type="submit">Update Password</button>
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

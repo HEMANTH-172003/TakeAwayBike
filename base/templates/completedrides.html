@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'base.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="rides-page">
+    <div class="watermark"></div>
+
+    <h2 class="page-title">Completed Rides</h2>
+
+    <div class="rides-grid">
+        {% for c in completed %}
+            <div class="ride-card">
+                <div class="ride-img-container">
+                    {% if c.bike_image %}
+                        <img src="{{ c.bike_image.url }}" alt="{{ c.bike_model }}">
+                    {% else %}
+                        <div class="no-img-placeholder">No Image Available</div>
+                    {% endif %}
+                </div>
+
+                <div class="ride-info">
+                    <h3>BikeModel : {{ c.bike_model }}</h3>
+                    <p class="bike-num"><span>Number:</span> {{ c.bike_number }}</p>
+
+                    <div class="ride-divider"></div>
+
+                    <div class="ride-stats">
+                        <div class="stat-item">
+                            <label>Total Hours</label>
+                            <p>{{ c.total_hours }} hrs</p>
+                        </div>
+                        <div class="stat-item">
+                            <label>Total Price</label>
+                            <p class="price-text">₹{{ c.total_amount }}</p>
+                        </div>
+                    </div>
+
+                    <div class="ride-divider"></div>
+
+                    <p class="completed-date"><b>Completed On:</b> {{ c.completed_at }}</p>
+                </div>
+            </div>
+        {% empty %}
+            <div class="empty-state">
+                <i class="fas fa-history"></i>
+                <h3>No completed rides yet.</h3>
+                <p>Once you finish a ride, it will appear here.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'base.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="request-page">
+    <div class="request-container">
+        <h2>Request Bikes</h2>
+
+        <div class="request-layout">
+            <div class="request-info-section">
+                <h3>User Details</h3>
+                <div class="user-details-card">
+                    <p><b>First Name:</b> {{ request.user.first_name }}</p>
+                    <p><b>Last Name:</b> {{ request.user.last_name }}</p>
+                    <p><b>Email:</b> {{ request.user.email }}</p>
+                    <p><b>Mobile:</b> {{ profile.mobile }}</p>
+                </div>
+                
+                <div class="price-notice">
+                    <p>Note: Advance amount is calculated at ₹150 per bike.</p>
+                </div>
+            </div>
+
+            <form method="POST" class="request-form">
+                {% csrf_token %}
+                <h3>Request Details</h3>
+
+                <div class="form-group">
+                    <label for="bike_count">Number of Bikes</label>
+                    <input type="number" name="bike_count" id="bike_count" placeholder="0" required oninput="calculateAdvance()">
+                </div>
+
+                <div class="form-group">
+                    <label>Address to Deliver Bikes</label>
+                    <textarea name="address" rows="3" placeholder="Enter delivery address" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Advance Amount</label>
+                    <input type="text" id="advance" class="readonly-input" readonly value="₹0">
+                </div>
+
+                <button type="submit" class="submit-request-btn">Submit Request</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function calculateAdvance() {
+    let count = document.getElementById("bike_count").value;
+    let advance = count * 150;
+    document.getElementById("advance").value = "₹" + (count > 0 ? advance : 0);
+}
+</script>
+{% endblock %}

@@ -1,0 +1,285 @@
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ================= ROOT FONT ================= */
+html {
+    font-size: 1rem;
+}
+
+/* Global Link Color */
+a {
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+/* ================= COMMON PAGE ================= */
+.login-page,
+.register-page,
+.reset-page,
+.update-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    position: relative;
+    padding: 5vh 0;
+}
+
+/* ================= WATERMARK ================= */
+.watermark {
+    position: absolute;
+    width: 30vw;
+    height: 30vw;
+    background: url('/static/images/bike.png') no-repeat center;
+    background-size: contain;
+    opacity: 0.40;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0vh); }
+    50% { transform: translateY(-2vh); }
+}
+
+/* ================= CONTAINERS ================= */
+.login-container,
+.register-container,
+.reset-container,
+.update-container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(1vw);
+    padding: 3vh 2vw;
+    border-radius: 1vw;
+    color: #fff;
+    box-shadow: 0 0.5vw 2vw rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.6s ease;
+}
+
+.login-container,
+.reset-container {
+    width: 25vw;
+    min-width: 280px;
+}
+
+.register-container,
+.update-container {
+    width: 50vw;
+    min-width: 300px;
+}
+
+/* ================= TITLE & MESSAGES ================= */
+h2 {
+    text-align: center;
+    margin-bottom: 2vh;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.error-msg, .success-msg {
+    text-align: center;
+    margin-bottom: 1.5vh;
+    font-size: 0.9rem;
+}
+
+.error-msg { color: #ff4d4d; }
+.success-msg { color: #00e676; }
+
+/* ================= GRID ================= */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2vh;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+/* ================= INPUT ================= */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5vh;
+}
+
+.input-group label {
+    font-size: 0.8rem;
+    margin-bottom: 0.5vh;
+    color: #ccc;
+}
+
+.input-group input {
+    padding: 1.2vh 0.8vw;
+    border-radius: 0.5vw;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transition: 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.input-group input[type="file"] {
+    padding: 1vh;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.input-group input:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border: 0.1vw solid #00e6b8;
+}
+
+/* ================= BUTTON & LINKS ================= */
+button {
+    width: 100%;
+    padding: 1.5vh;
+    border-radius: 2vw;
+    border: none;
+    background: #00e6b8;
+    color: #000;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: #00c9a7;
+    color: #fff;
+    transform: translateY(-0.3vh);
+}
+
+.forgot-link {
+    display: block;
+    margin-top: 1.5vh;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.forgot-link:hover {
+    color: #00e6b8;
+    text-decoration: underline;
+}
+
+.btn-link main-btn:hover {
+    color: #00e6b8;
+    text-decoration: underline;
+}
+
+/* ================= PROFILE SPECIFIC ================= */
+.profile-card {
+    max-width: 800px;
+    width: 60vw !important;
+}
+
+.profile-content {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
+}
+
+.profile-image-section,
+.profile-info-section {
+    flex: 1;
+    width: 50%;
+}
+
+.profile-image-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid rgba(0, 230, 184, 0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.info-item {
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 8px;
+}
+
+.info-item .label {
+    display: block;
+    color: #00e6b8;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.info-item .value {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.btn-link.main-btn {
+    display: block;
+    text-align: center;
+}
+
+/* ================= ANIMATION ================= */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(2vh);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .login-container,
+    .reset-container,
+    .register-container,
+    .update-container,
+    .profile-card {
+        width: 90vw !important;
+    }
+
+    .profile-content {
+        flex-direction: column;
+    }
+
+    .profile-image-section,
+    .profile-info-section {
+        width: 100%;
+    }
+
+    .profile-image-container {
+        width: 200px;
+        margin: 0 auto;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width {
+        grid-column: span 1;
+    }
+
+    .watermark {
+        width: 60vw;
+        height: 60vw;
+    }
+}

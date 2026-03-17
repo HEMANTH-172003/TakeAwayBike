@@ -1,0 +1,76 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'base.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="bookings-list-page">
+    <h2 class="page-title">My Bookings</h2>
+
+    <div class="bookings-grid">
+        {% for b in bookings %}
+            <div class="booking-item-card">
+                <div class="card-header">
+                    <h3>{{ b.first_name }} {{ b.last_name }}</h3>
+                    <span class="status-badge status-{{ b.status|lower }}">
+                        {{ b.status }}
+                    </span>
+                </div>
+
+                <div class="card-body">
+                    <div class="info-section">
+                        <p><b>Email:</b> {{ b.email }}</p>
+                        <p><b>Mobile:</b> {{ b.mobile }}</p>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="bike-summary">
+                        {% if b.bike.bike_image %}
+                            <img src="{{ b.bike.bike_image.url }}" class="small-bike-img">
+                        {% endif %}
+                        <div class="bike-text">
+                            <p><b>Model:</b> {{ b.bike.bike_model }}</p>
+                            <p><b>Number:</b> {{ b.bike.bike_number }}</p>
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="trip-details">
+                        <p><b>Location:</b> {{ b.exact_location }}</p>
+                        <p><b>Date:</b> {{ b.booking_date }}</p>
+                        <p class="timestamp">Booked: {{ b.created_at|date:"M d, Y" }}</p>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    {% if b.status == 'Confirmed' or b.status == 'Booked' %}
+                        <a href="{% url 'completebooking' b.id %}" 
+                           onclick="return confirm('End this ride and generate bill?')" 
+                           class="btn-action btn-complete">
+                           Complete Ride
+                        </a>
+                        <a href="{% url 'cancelbooking' b.id %}" 
+                           onclick="return confirm('Are you sure you want to cancel?')" 
+                           class="btn-action btn-cancel">
+                           Cancel Booking
+                        </a>
+                    {% elif b.status == 'Completed' %}
+                        <p class="status-msg msg-completed">✔ Ride Finished</p>
+                    {% elif b.status == 'Cancelled' %}
+                        <p class="status-msg msg-cancelled">✘ Booking Cancelled</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% empty %}
+            <div class="empty-bookings">
+                <h3>No bookings yet</h3>
+                <p>Ready to ride? <a href="{% url 'home' %}">Explore bikes here.</a></p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

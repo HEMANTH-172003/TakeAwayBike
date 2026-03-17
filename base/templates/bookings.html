@@ -1,0 +1,54 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'base.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="booking-page">
+    <div class="booking-container">
+        <h2>Book Bike</h2>
+
+        <div class="booking-card">
+            <div class="booking-section">
+                <h3>Bike Details</h3>
+                {% if bike.bike_image %}
+                    <div class="booking-img-wrapper">
+                        <img src="{{ bike.bike_image.url }}" class="bike-img">
+                    </div>
+                {% endif %}
+                <div class="detail-text">
+                    <p class="bike-name"><strong>Model:</strong> {{ bike.bike_model }}</p>
+                    <p class="bike-number"><strong>Number:</strong> {{ bike.bike_number }}</p>
+                </div>
+            </div>
+
+            <div class="booking-section">
+                <h3>User Details</h3>
+                <div class="user-info-box">
+                    <p><b>First Name:</b> {{ request.user.first_name }}</p>
+                    <p><b>Last Name:</b> {{ request.user.last_name }}</p>
+                    <p><b>Email:</b> {{ request.user.email }}</p>
+                    <p><b>Mobile:</b> {{ profile.mobile }}</p>
+                </div>
+            </div>
+        </div>
+
+        <form method="POST" class="booking-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Pickup Location</label>
+                <input type="text" name="location" placeholder="Enter location" required>
+            </div>
+
+            <div class="form-group">
+                <label>Select Date</label>
+                <input type="date" name="date" required>
+            </div>
+
+            <button type="submit" class="confirm-btn">Confirm Booking</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

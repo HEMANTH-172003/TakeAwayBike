@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'base.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="home-page">
+    <div class="watermark"></div>
+
+    <center>
+        <h2 class="page-title">Bikes Avaliable</h2>
+    </center>
+
+    <div class="bike-grid">
+        {% for i in data %}
+        <div class="bike-card">
+            <div class="card-body">
+                <div class="bike-details">
+                    <h3>Bike Owner : {{i.bike_owner}}</h3>
+                    <h3>Bike Model : {{i.bike_model}}</h3>
+                    <h3>Bike Number : {{i.bike_number}}</h3>
+                    <h3>Contact : {{i.owner_mobile}}</h3>
+                    <h3>Location : {{i.location}}</h3>
+                    <h3>Cost PerHr : {{i.amount_per_hour}}</h3>
+                    <h3>Availability : {{i.available_from}} - {{i.available_to}}</h3>
+                </div>
+
+                <div class="bike-image">
+                    <img src="{{i.bike_image.url}}" alt="Bike Image">
+                </div>
+            </div>
+
+            <div class="bike-action">
+                <a href="{% url 'bookings' i.id %}" class="book-btn">Book Bike</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

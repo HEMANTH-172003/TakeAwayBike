@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'base.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="about-page">
+    <div class="watermark"></div>
+
+    <div class="about-container">
+        <div class="about-header">
+            <h1>About Our Bike Rental</h1>
+            <p>Ride anywhere, anytime with ease 🚴</p>
+        </div>
+
+        <div class="about-main">
+            <div class="about-image">
+                <img src="{% static 'images/bike.jpg' %}" alt="Bike Rental">
+            </div>
+
+            <div class="about-content">
+                <p class="description">
+                    We provide a fast and reliable way to rent bikes across the city.
+                    Whether you're commuting or exploring, we’ve got you covered.
+                </p>
+
+                <div class="features-grid">
+                    <div class="feature-card">✔ Easy Booking</div>
+                    <div class="feature-card">✔ Affordable Prices</div>
+                    <div class="feature-card">✔ Multiple Locations</div>
+                    <div class="feature-card">✔ Track Your Rides</div>
+                </div>
+
+                <div class="btn-container">
+                    <a href="{% url 'home' %}" class="explore-btn">Explore Bikes</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-contact">
+            <h3>Contact Us</h3>
+            <div class="contact-grid">
+                <div class="contact-item">📧 support@bikerental.com</div>
+                <div class="contact-item">📞 +91 9876543210</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

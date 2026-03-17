@@ -1,0 +1,71 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'base.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="bill-page">
+    <div class="bill-container">
+        <header class="bill-header">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <h2>Ride Summary & Bill</h2>
+            <p>Thank you for riding with BikeApp!</p>
+        </header>
+
+        <div class="bill-receipt">
+            <div class="receipt-main">
+                <div class="receipt-section">
+                    <h3><i class="fas fa-user"></i> User Details</h3>
+                    <p><b>Name:</b> {{ c.first_name }}</p>
+                    <p><b>Mobile:</b> {{ c.mobile }}</p>
+                </div>
+
+                <div class="receipt-section">
+                    <h3><i class="fas fa-motorcycle"></i> Bike Details</h3>
+                    <p><b>Model:</b> {{ c.bike_model }}</p>
+                    <p><b>Number:</b> {{ c.bike_number }}</p>
+                </div>
+            </div>
+
+            {% if c.bike_image %}
+                <div class="bill-img-wrapper">
+                    <img src="{{ c.bike_image.url }}" alt="Bike">
+                </div>
+            {% endif %}
+
+            <div class="receipt-divider"></div>
+
+            <div class="receipt-section">
+                <h3><i class="fas fa-clock"></i> Ride Duration</h3>
+                <div class="time-grid">
+                    <p><b>Start:</b> {{ c.start_time }}</p>
+                    <p><b>End:</b> {{ c.end_time }}</p>
+                    <p class="highlight-text"><b>Total Hours:</b> {{ c.total_hours }} hrs</p>
+                </div>
+            </div>
+
+            <div class="receipt-divider"></div>
+
+            <div class="receipt-footer">
+                <div class="payment-row">
+                    <span>Price per Hour</span>
+                    <span>₹{{ c.amount_per_hour }}</span>
+                </div>
+                <div class="payment-row total">
+                    <span>Total Amount</span>
+                    <span>₹{{ c.total_amount }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bill-actions">
+            <a href="{% url 'my_bookings' %}" class="back-btn">Back to My Bookings</a>
+            <button onclick="window.print()" class="print-btn">
+                <i class="fas fa-print"></i> Print Receipt
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}

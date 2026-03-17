@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'base.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="cancel-page">
+    <div class="cancel-container">
+        <h2>Cancel Booking</h2>
+
+        <div class="cancel-layout">
+            <div class="cancel-info-section">
+                <h3>Booking Summary</h3>
+                <div class="booking-details-card">
+                    <p><b>Bike Model:</b> {{ booking.bike.bike_model }}</p>
+                    <p><b>Booking Date:</b> {{ booking.booking_date }}</p>
+                    <p><b>Location:</b> {{ booking.location }}</p>
+                </div>
+                
+                <div class="warning-notice">
+                    <p><i class="fas fa-exclamation-triangle"></i> Note: This action cannot be undone. Please provide a reason if possible.</p>
+                </div>
+            </div>
+
+            <form method="POST" class="cancel-form">
+                {% csrf_token %}
+                <h3>Cancellation Details</h3>
+
+                <div class="form-group">
+                    <label>Reason for Cancellation (Optional)</label>
+                    <textarea name="reason" rows="4" placeholder="Why are you canceling?"></textarea>
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="confirm-cancel-btn">Confirm Cancel</button>
+                    <a href="{% url 'home' %}" class="go-back-link">Keep My Booking</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
